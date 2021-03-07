@@ -1,0 +1,22 @@
+{% extends "fitfeed/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %} 
+
+		<form method="POST">
+			{% csrf_token %}
+				<legend class="border-bottom">Provide login credentials.</legend>
+				<p>Need an account?
+					<a href="{% url 'register'%}">register now</a>
+				</p> 
+			<fieldset class="form-group">
+				{% load crispy_forms_tags %}
+				{{ form  | crispy }}
+			</fieldset>
+			<div class="form-group">
+				<spam><button class="btn" type="submit">Login</button> </spam>			
+			</div>
+		</form>
+
+
+
+{% endblock content %}

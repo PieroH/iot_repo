@@ -1,0 +1,20 @@
+{% extends "fitfeed/base.html" %}
+{% block content %} 
+	
+		<form method="POST">
+			{% csrf_token %}
+				<legend class="border-bottom"> Welcome to Fitminder, register your Fitness Account!</legend>
+				<p>Already have an account?
+					<a href="{% url 'login'%}"> login here</a>
+				</p> 
+			<fieldset class="form-group">
+				{% load crispy_forms_tags %}
+				{{ form  | crispy }}
+			</fieldset>
+			<div class="form-group">
+				<span>	<button class="btn" type="submit">Register</button> </span>			
+			</div>
+		</form>
+
+
+{% endblock content %}
