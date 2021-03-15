@@ -28,7 +28,7 @@ class Feed(models.Model):
 	fit_duration = models.DurationField()
 	datetime_feed = models.DateTimeField(default=timezone.now)
 	author = models.ForeignKey(User, on_delete=models.CASCADE)
-	fit_image = models.ImageField(default='#', upload_to='activity_thumbnail')
+	fit_image = models.ImageField(default='#', upload_to='media/activity_thumbnail')
 
 
 	def __str__(self):
