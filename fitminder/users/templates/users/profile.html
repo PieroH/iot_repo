@@ -1,49 +1,63 @@
 {% extends "fitfeed/base.html" %}
+{% load static %}
 {% block content %} 
 
-	<div class="content-section">
-		
-		<h1> {{ user.username }} Profile</h1>
 
+<div class="container-fluid content-section">
+	
+	<div class></div>
+	<h1> {{ user.username }} Profile</h1>
 
-		<img src="{{ user.profile.img.url }}" class="rounded-circle mx-auto d-block" alt="profile_picture_of{{ user.username }}">
-
-		<h2>Recent Activities</h2>
-
-
-<!-- https://getbootstrap.com/docs/5.0/content/tables/ -->
-		<table class="table">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">First</th>
-				<th scope="col">Last</th>
-				<th scope="col">Handle</th>
-			</tr>
-		</thead>
-			<tbody>
-				<tr>
-				<th scope="row">1</th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>Jacob</td>
-				<td>Thornton</td>
-				<td>@fat</td>
-			</tr>
-				<tr>
-				<th scope="row">3</th>
-				<td colspan="2">Larry the Bird</td>
-				<td>@twitter</td>
-			</tr>
-			</tbody>
-		</table>
-
+	<div class="col-md-4">
+	<img  
+	class="rounded-circle mx-auto d-block border p-2 border-white position-right" 
+	src="{{ request.user.fitprofile.img.url }}"
+	>
 	</div>
 
+</div>
+
+	
+	<div class="content-section">
+		
+
+		<h3>Recent Activities</h3>
+
+<!-- https://getbootstrap.com/docs/5.0/content/tables/ -->
+	<table class="table light">
+		<thead>
+			<tr>
+				<th scope="row"><p>#</p></th>
+
+					<th scope="col"><p> Activity </p></th>
+					<th scope="col"><p> Duration  </p></th>
+					<th scope="col"><p> Rating </p></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<th scope="row"><p>1</p></th>
+					<td><p> Running </p></td>
+					<td><p> 30 mins </p></td>
+					<td><p> *****</p></td>
+			</tr>
+			<tr>
+				<th scope="row"><p>2</p></th>
+					<td><p> FatBurn </p></td>
+					<td><p> 50 mins </p></td>
+					<td><p> ***</p></td>
+			</tr>
+			<tr>
+				<th scope="row"><p>3</p></th>
+					<td><p>Cardio </p></td>
+					<td><p> 10 mins </p></td>
+					<td><p> **** </p></td>
+			</tr>
+		</tbody>
+	</table>
+
+	</div>
 	
 
 

@@ -16,10 +16,18 @@ ul {
   margin: 0;
 }
 
+.table { 
+  color: #45A29E;
+}
+
+.rounded-circle{
+  border-radius: 5px;
+}
+
 .btn {
   border-radius: 5px;
   margin: 5px;
-  border-color: #C5C6C7; 
+  border-color: #C5C6C7;
   color: #45A29E;
 }
 .btn:hover {

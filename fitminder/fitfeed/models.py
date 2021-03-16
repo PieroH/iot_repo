@@ -19,31 +19,31 @@ class Feed(models.Model):
 		(f4, '...')
 	]
 
-	fit_title = models.CharField(max_length=100)
-	fit_content = models.CharField(
+	title = models.CharField(max_length=100)
+	content = models.CharField(
 		max_length=3,
 		choices=FIT_ACTIVITIES, 
 		default=f4
 	)
-	fit_duration = models.DurationField()
-	datetime_feed = models.DateTimeField(default=timezone.now)
+	duration = models.DurationField()
+	datetime= models.DateTimeField(default=timezone.now)
 	author = models.ForeignKey(User, on_delete=models.CASCADE)
-	fit_image = models.ImageField(default='#', upload_to='media/activity_thumbnail')
+	img = models.ImageField(default='#', upload_to='media')
 
 
 	def __str__(self):
 		return self.fit_title
 
 	def was_published_recently(self):
-		return self.datetime_feed >= timezone.now() - datetime.timedelta(days=1)
+		return self.datetime >= timezone.now() - datetime.timedelta(days=1)
 
 	def get_absolute_url(self):
 		return reverse('feed-feed', kwargs={'pk':self.pk})
 
 	def save(self, **kwargs):
 		super().save(**kwargs)
-		img = Image.open(self.fit_image.path)
-		if img.height > 300 or img.width > 300:
-			output_size = (300, 300)
+		img = Image.open(self.img.path)
+		if img.height > 100 or img.width > 100:
+			output_size = (100, 100)
 			img.thumbnail(output_size)
-			img.save(self.fit_image.path)	
+			img.save(self.img.path)	
