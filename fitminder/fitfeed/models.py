@@ -5,29 +5,33 @@ from django.urls import reverse
 from PIL import Image
 from datetime import datetime
 
+
+
+i1 = '..1'
+i2 = '..2'
+i3 = '..3'
+i4 = '..4'
+
+FIT_INTENSITY = [
+	(i1, 'LOW'),
+	(i2, 'MODERATE'),
+	(i3, 'HIGH'),
+	(i4, '...')
+]
+
 class Feed(models.Model):
 	
-	f1 = 'fa1'
-	f2 = 'fa2'
-	f3 = 'fa3'
-	f4 = 'fa4'
-
-	FIT_ACTIVITIES = [
-		(f1, 'Fat Burn'),
-		(f2, 'Cardio'),
-		(f3, 'Strength'),
-		(f4, '...')
-	]
 
 	title = models.CharField(max_length=100)
-	content = models.CharField(
+	intensity = models.CharField(
 		max_length=3,
-		choices=FIT_ACTIVITIES, 
-		default=f4
+		choices=FIT_INTENSITY, 
+		default=i4
 	)
-	duration = models.DurationField()
-	datetime= models.DateTimeField(default=timezone.now)
-	author = models.ForeignKey(User, on_delete=models.CASCADE)
+	preparation = models.CharField(max_length=400, default="")
+	instruction = models.CharField(max_length=600, default="")
+	duration = models.DurationField(null=False)
+	datetime = models.DateTimeField(default=timezone.now)
 	img = models.ImageField(default='#', upload_to='media')
 
 
