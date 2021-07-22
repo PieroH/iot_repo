@@ -32,14 +32,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'fitfeed.apps.FitfeedConfig',
-    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
+    'fitfeed.apps.FitfeedConfig',
+    'users.apps.UsersConfig',
+
+    'django_celery_results',
+
     'bootstrap5',
     'crispy_forms',
 ]
@@ -136,6 +141,27 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'feed-home'
+LOGIN_REDIRECT_URL = 'home'
 
 LOGIN_URL = 'login'
+
+
+# CELERY - REDIS
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+# CELERY_TASK_ALWAYS_EAGER = True
+CELERY_TIMEZONE = 'Europe/Warsaw'
+CELERY_TEMPLATES = '../scheduler/templates/scheduler'
+
+# change to bootstrap 4
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+WEATHER_API_BASE_URL = 'https://api.weatherapi.com/v1/current.json?key={api_key}&q={coords}'
+WEATHER_API_KEY = '77481d1be32e4eb28b8132535211807'

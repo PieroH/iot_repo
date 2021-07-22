@@ -7,47 +7,19 @@ from datetime import datetime
 
 
 
-i1 = '..1'
-i2 = '..2'
-i3 = '..3'
-i4 = '..4'
+class Event(models.Model):
+    event_name = models.CharField(max_length=50, null=False)
+    start_date = models.DateField('Event starts', blank=False, default = timezone.now)
+    start_time = models.TimeField('Time', blank=False, default = timezone.now)
+    end_date = models.DateField('Event ends', blank=False, default = timezone.now)
+    end_time = models.TimeField('Ends at', blank=False, default = timezone.now)
+    date_published = models.DateTimeField(default = timezone.now)
+    description = models.TextField(null=False, verbose_name='Description', default="Description Here")
+    location = models.CharField(max_length=100, null=False, default="")
+    author = models.ForeignKey(User, on_delete = models.CASCADE, default="")
 
-FIT_INTENSITY = [
-	(i1, 'LOW'),
-	(i2, 'MODERATE'),
-	(i3, 'HIGH'),
-	(i4, '...')
-]
+    def was_published_recently(self):
+        return self.date_published >= timezone.now() - datetime.timedelta(days=1)
 
-class Feed(models.Model):
-	
-
-	title = models.CharField(max_length=100)
-	intensity = models.CharField(
-		max_length=3,
-		choices=FIT_INTENSITY, 
-		default=i4
-	)
-	preparation = models.CharField(max_length=400, default="")
-	instruction = models.CharField(max_length=600, default="")
-	duration = models.DurationField(null=False)
-	datetime = models.DateTimeField(default=timezone.now)
-	img = models.ImageField(default='#', upload_to='media')
-
-
-	def __str__(self):
-		return self.fit_title
-
-	def was_published_recently(self):
-		return self.datetime >= timezone.now() - datetime.timedelta(days=1)
-
-	def get_absolute_url(self):
-		return reverse('feed-feed', kwargs={'pk':self.pk})
-
-	def save(self, **kwargs):
-		super().save(**kwargs)
-		img = Image.open(self.img.path)
-		if img.height > 100 or img.width > 100:
-			output_size = (100, 100)
-			img.thumbnail(output_size)
-			img.save(self.img.path)	
+    def get_absolute_url(self):
+        return reverse('event-detail', kwargs={'pk':self.pk})

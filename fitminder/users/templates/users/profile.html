@@ -3,16 +3,34 @@
 {% block content %} 
 
 
-<div class="container-fluid content-section">
-	
-	<div class></div>
-	<h1> {{ user.username }} Profile</h1>
+<div class="content-section">
 
-	<div class="col-md-4">
-	<img  
-	class="rounded-circle mx-auto d-block border p-2 border-white position-right" 
-	src="{{ request.user.fitprofile.img.url }}"
-	>
+	<div class="row">
+		<h1> {{ user.username }} Profile</h1>
+	</div>
+
+
+	<div class="row">
+		<div class="col">
+	<img class="rounded-circle mx-auto d-block border p-2 border-white position-right" src="{{ request.user.fitprofile.img.url }}">
+
+	</div>
+
+  	<div class="col">
+		<form method="POST" enctype="multipart/form-data"> 
+		{% load crispy_forms_tags %}
+		{% csrf_token %}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-6">Edit Profile Info</legend>
+				{{ user_form | crispy }}
+				{{ profile_form | crispy }}
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-info" type="submit">Save Changes</button>
+			</div>
+		</form>
+	</div>
+
 	</div>
 
 </div>
@@ -56,6 +74,10 @@
 			</tr>
 		</tbody>
 	</table>
+
+
+
+	 </div>
 
 	</div>
 	
