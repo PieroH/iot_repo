@@ -132,17 +132,10 @@ STATIFILES_DIR = [
 ]
 STATIC_URL = '/static/'
 
-
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
-
 MEDIA_URL = '/media/'
 
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
 LOGIN_REDIRECT_URL = 'home'
-
 LOGIN_URL = 'login'
 
 
