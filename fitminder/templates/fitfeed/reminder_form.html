@@ -1,0 +1,54 @@
+{% extends "fitfeed/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %} 
+
+<div class="container">
+	<div class="content-section">
+		<form method="POST" enctype="multipart/form-data"> 
+			{% csrf_token %}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Edit One-Off Reminder!</legend>
+				{{ form | crispy }}
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-info" type="submit">Run now!</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<button id="fetchCoords">Fetch my coordinates</button>
+</div>
+
+<script type="text/javascript">
+    function geoFindMe() {
+
+    function success(position) {
+        const latitude  = position.coords.latitude.toFixed(5);
+        const longitude = position.coords.longitude.toFixed(5);
+        console.log(latitude);
+        console.log(longitude);
+        document.getElementById('id_latitude').value = latitude;
+        document.getElementById('id_longitude').value = longitude;
+
+    }
+
+    function error() {
+        console.log('Unable to retrieve your location');
+    }
+
+    if(!navigator.geolocation) {
+        console.log('Geolocation is not supported by your browser');
+    } else {
+        status.textContent = 'Locating…';
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
+
+}
+
+document.querySelector('#fetchCoords').addEventListener('click', geoFindMe);
+
+</script>
+
+{% endblock content %}

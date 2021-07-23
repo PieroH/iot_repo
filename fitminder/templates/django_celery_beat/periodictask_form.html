@@ -1,0 +1,110 @@
+{% extends "fitfeed/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<!--             'start_time',
+            'expires',
+            '',
+            'interval',
+            'joke',
+            'weather',
+            'latitude',
+            'longitude', -->
+
+<div class="container">
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data"> 
+        {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form.name | as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form.start_time | as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form.expires | as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form.interval | as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form.joke | as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form.weather | as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form.latitude | as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form.longitude | as_crispy_field }}
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Add Reminder</button>
+            </div>
+        </form>
+    </div>
+    <button id="fetchCoords">Fetch my coordinates</button>
+</div>
+
+<script type="text/javascript">
+    function geoFindMe() {
+
+    function success(position) {
+        const latitude  = position.coords.latitude.toFixed(5);
+        const longitude = position.coords.longitude.toFixed(5);
+        console.log(latitude);
+        console.log(longitude);
+        document.getElementById('id_latitude').value = latitude;
+        document.getElementById('id_longitude').value = longitude;
+
+    }
+
+    function error() {
+        console.log('Unable to retrieve your location');
+    }
+
+    if(!navigator.geolocation) {
+        console.log('Geolocation is not supported by your browser');
+    } else {
+        status.textContent = 'Locating…';
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
+
+}
+
+document.querySelector('#fetchCoords').addEventListener('click', geoFindMe);
+
+
+</script>
+
+
+{% endblock content %}
+<!-- 
+
+            <fieldset class="form-group" >
+                <legend class="border-bottom mb-4">Create new Reminder from FORM!</legend>
+                {{ form | crispy }}    
+                </script>
+            </fieldset>
+ -->

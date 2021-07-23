@@ -1,0 +1,35 @@
+{% extends "fitfeed/base.html" %}
+
+{% block content %} 
+
+
+
+
+<h1>Hello, friend</h1>
+
+<h2>These are your active reminders</h2>
+
+
+<div class="row"> 
+	<div class="col"> 
+		<a href="{%url 'reminder-create' %}">
+			<button class="nav-item  nav-link">Create New Reminder</button>
+		</a>
+		<a href="{%url 'reminder-oneoff' %}">
+			<button class="nav-item  nav-link" href="{%url 'reminder-create' %}">Send a one-off message</button>
+		</a>
+	</div>
+
+
+	<div class="col"> 
+		<ul>
+		{% for object in object_list %}
+			<li>{{ object.message }} - {{ object.task.interval }} <a href="{% url 'reminder-edit' object.pk %}"><button>Edit Reminder</button></a></li>
+		{% endfor %}
+			
+		</ul>
+	</div>
+</div>
+
+
+{% endblock content %}
