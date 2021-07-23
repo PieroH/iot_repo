@@ -40,13 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
 
-    'fitfeed.apps.FitfeedConfig',
-    'users.apps.UsersConfig',
-
-    'django_celery_results',
+    'fitfeed',
+    'users',
+    'django_celery_beat',
 
     'bootstrap5',
     'crispy_forms',
+    'fortune',
+
 ]
 
 MIDDLEWARE = [
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'fitminder.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -135,7 +136,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 
 
@@ -151,7 +152,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 # CELERY_TASK_ALWAYS_EAGER = True
 CELERY_TIMEZONE = 'Europe/Warsaw'
-CELERY_TEMPLATES = '../scheduler/templates/scheduler'
+CELERY_TEMPLATES = '../fitfeed/templates/fitfeed'
 
 # change to bootstrap 4
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
