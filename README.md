@@ -12,30 +12,6 @@ sudo lsof -t -i:8000
 sudo kill -9 <PID>
 ```
 
-
-
-
-
-## DEV - RUN APP requirements
-#### 1. Run Main Server from Fitminder App at directory based path (with manage.py)
-```bash 
-  python3 manage.py runserver
-```
-#### 2. Celery Worker Running In Terminal Window
-```bash
-celery -A celery_test  worker -l info -B
-```
-
-#### 3. In another, Celery_Beat should scan for periodic tasks saved in the PeriodicTasks.models.
-
-[[6] - Django_Celery_Beat](https://github.com/celery/django-celery-beat)
-```bash
-celery -A celery_test beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
-```
-
-
-
-
 ```bash 
 ```
 ## FITMINDER Application Configuration
@@ -82,6 +58,7 @@ source ~/.bashrc
 => Creating and enabling working virtual envirnment with mkvirtualenv <name_of_Venv>
 
 ```bash 
+# mkvirtualenv <name_of_environment>
 mkvirtualenv fitenv
 ```
 
@@ -106,7 +83,24 @@ python3 -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-##### CRON 
+
+
+## DEV - RUN APP requirements
+#### 1. Run Main Server from Fitminder App at directory based path (with manage.py)
+```bash 
+  python3 manage.py runserver
+```
+#### 2. Celery Worker Running In Terminal Window
+```bash
+celery -A celery_test  worker -l info -B
+```
+
+#### 3. In another, Celery_Beat should scan for periodic tasks saved in the PeriodicTasks.models.
+
+[[6] - Django_Celery_Beat](https://github.com/celery/django-celery-beat)
+```bash
+celery -A celery_test beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+```
 
 ##### Celery + Redis as broker for AUTOMATED SCHEDULING on Django App - Server
 
@@ -137,13 +131,12 @@ $ celery -A celery_test  worker -l info -B
 [[6] - Django_Celery_Beat](https://github.com/celery/django-celery-beat)
 ```bash
 
-$ celery -A celery_test beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+$ celery -A fitminder beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 
 [2021-07-11 13:10:00,317: INFO/MainProcess] Scheduler: Sending due task RPI TASK (scheduler.views.task1)
 
 ```
 ### Redis Server CLI Log: 
-
 
 ```bash 
 redis-cli
@@ -152,11 +145,10 @@ redis-cli
 ### Clean Celery (Purge)
 
 ```bash 
-celery -A celery_test purge
+celery -A fitminder purge
 ```
 
 ## RPI
-
 python manage.py runserver 0.0.0.0:8080
 
 

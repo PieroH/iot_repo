@@ -7,29 +7,45 @@
 
 <h1>Hello, friend</h1>
 
-<h2>These are your active reminders</h2>
 
+
+
+{% if user.is_authenticated %}
 
 <div class="row"> 
-	<div class="col"> 
-		<a href="{%url 'reminder-create' %}">
-			<button class="nav-item  nav-link">Create New Reminder</button>
-		</a>
-		<a href="{%url 'reminder-oneoff' %}">
-			<button class="nav-item  nav-link" href="{%url 'reminder-create' %}">Send a one-off message</button>
-		</a>
+
+	<div class="col container"> 
+			<a href="{%url 'reminder-create' %}">
+				<button class="btn">Create New Reminder</button>
+			</a>
+			<br>
+			<a href="{%url 'reminder-oneoff' %}">
+				<button class="btn" href="{%url 'reminder-create' %}">Send a one-off message</button>
+			</a>
 	</div>
 
 
+
+	{% if objects.empty %}
+
+	{% else %}
 	<div class="col"> 
+	<h2>These are your active reminders</h2>
 		<ul>
 		{% for object in object_list %}
-			<li>{{ object.message }} - {{ object.task.interval }} <a href="{% url 'reminder-edit' object.pk %}"><button>Edit Reminder</button></a></li>
+			<li>{{ object.message }} - {{ object.task.interval }} 
+				<a href="{% url 'reminder-edit' object.pk %}">
+					<button>Edit Reminder</button>
+				</a>
+			</li>
 		{% endfor %}
-			
 		</ul>
+
 	</div>
+	{% endif %}
+
 </div>
+{% endif %}
 
 
 {% endblock content %}

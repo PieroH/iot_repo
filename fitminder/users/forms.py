@@ -23,4 +23,4 @@ class ProfileUpdateForm(forms.ModelForm):
 	class Meta:
 		model = FitProfile
 		fields = ['img']
-		exclude = ['user']
+		exclude = ['user', 'currently']

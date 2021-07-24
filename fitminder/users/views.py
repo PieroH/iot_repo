@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from fitfeed.models import Event
+from fitfeed.models import Reminder
 from users.models import FitProfile
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 

@@ -3,69 +3,71 @@
 
 {% block content %}
 
-
-<!--             'start_time',
-            'expires',
-            '',
-            'interval',
-            'joke',
-            'weather',
-            'latitude',
-            'longitude', -->
-
 <div class="container">
+        {% if form.errors %}
+            {{ form.errors }}
+        {% endif %}
     <div class="content-section">
         <form method="POST" enctype="multipart/form-data"> 
-        {% csrf_token %}
-            <div class="form-row">
-                <div class="form-group">
-                    {{ form.name | as_crispy_field }}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    {{ form.start_time | as_crispy_field }}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    {{ form.expires | as_crispy_field }}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    {{ form.interval | as_crispy_field }}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    {{ form.joke | as_crispy_field }}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    {{ form.weather | as_crispy_field }}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    {{ form.latitude | as_crispy_field }}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    {{ form.longitude | as_crispy_field }}
-                </div>
+            {% csrf_token %}
+            <fieldset class="form-group" >
+                <legend class="border-bottom mb-4">Create new Reminder from FORM!</legend>
+                {{ form.name | as_crispy_field }}    
+
+
+
+
+            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+              {{ form.task }}
+              {{ form.start_time }}
+              <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+              </div>
             </div>
 
+            <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+              {{ form.expires }}
+              <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+              </div>
+            </div>
+
+                {{ form.interval | as_crispy_field }}    
+
+                {{ form.joke | as_crispy_field }}    
+
+                {{ form.weather | as_crispy_field }}    
+
+                {{ form.latitude | as_crispy_field }}    
+ 
+                {{ form.longitude | as_crispy_field }}    
+            </fieldset>
 
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Add Reminder</button>
             </div>
         </form>
+       
     </div>
     <button id="fetchCoords">Fetch my coordinates</button>
 </div>
+
+
+<script>
+  $(function () {
+    $("#datetimepicker1").datetimepicker({
+      format: 'YYYY/MM/DD HH:mm',
+    });
+  });
+
+
+    $(function () {
+    $("#datetimepicker2").datetimepicker({
+      format: 'YYYY/MM/DD HH:mm',
+    });
+  });
+</script>
+
 
 <script type="text/javascript">
     function geoFindMe() {
@@ -100,11 +102,3 @@ document.querySelector('#fetchCoords').addEventListener('click', geoFindMe);
 
 
 {% endblock content %}
-<!-- 
-
-            <fieldset class="form-group" >
-                <legend class="border-bottom mb-4">Create new Reminder from FORM!</legend>
-                {{ form | crispy }}    
-                </script>
-            </fieldset>
- -->
