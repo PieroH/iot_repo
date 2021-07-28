@@ -28,6 +28,14 @@ sudo kill -9 <PID>
 
 
 
+# HOW TO RUN THE VIRTUAL ENVIRONMENT FOR THE FITMINDER APP
+
+``` bash
+
+# Get pip and upgrade
+sudo apt-get install pip
+python3 -m pip install --upgrade pip
+```
 
 => Installing virtual environment package
 ``` bash
@@ -73,19 +81,14 @@ created virtual environment CPython3.8.5.final.0-64 in 99ms
 => Install pip and all required packages with compatible versions from requirements.txt file
 
 ```bash 
-# Get pip
-sudo apt-get install pip
-
-# upgrade
-python3 -m pip install --upgrade pip
-
 # Install all packages from Requirements.txt
 pip install -r requirements.txt
 ```
 
 
 
-## DEV - RUN APP requirements
+# DEV - RUN APP OPERATIONS
+
 #### 1. Run Main Server from Fitminder App at directory based path (with manage.py)
 ```bash 
   python3 manage.py runserver
