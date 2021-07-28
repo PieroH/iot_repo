@@ -4,7 +4,6 @@ from fitfeed.views import OneOffReminderView, ReminderCreateView, ReminderEditVi
 
 urlpatterns = [
     path('', ReminderListView.as_view(), name='index'),
-
     path('reminder/new/', ReminderCreateView.as_view(), name='reminder-create'),
     path('reminder/<int:pk>/', ReminderEditView.as_view(), name='reminder-edit'),
     path('reminder/oneoff/', OneOffReminderView.as_view(), name='reminder-oneoff'),

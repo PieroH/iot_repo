@@ -8,13 +8,18 @@
 <h1>Hello, friend</h1>
 
 
+<br>
 
-
-{% if user.is_authenticated %}
 
 <div class="row"> 
 
+{% if user.is_authenticated %}
+
+
 	<div class="col container"> 
+
+	<h4>Create your Reminders</h4>
+
 			<a href="{%url 'reminder-create' %}">
 				<button class="btn">Create New Reminder</button>
 			</a>
@@ -26,25 +31,66 @@
 
 
 
-	{% if objects.empty %}
+<div class="col"> 
+{% if objects.empty %}
+
+	<h2>You have no active reminders</h2>
 
 	{% else %}
-	<div class="col"> 
+
+
+
 	<h2>These are your active reminders</h2>
-		<ul>
-		{% for object in object_list %}
-			<li>{{ object.message }} - {{ object.task.interval }} 
-				<a href="{% url 'reminder-edit' object.pk %}">
-					<button>Edit Reminder</button>
-				</a>
-			</li>
+
+	<!-- https://getbootstrap.com/docs/5.0/content/tables/ -->
+	<table class="table light">
+		<thead>
+			<tr>
+				<th scope="row"><p>#</p></th>
+
+					<th scope="col"><p> Message </p></th>
+					<th scope="col"><p> Starts  </p></th>
+					<th scope="col"><p> Expires </p></th>
+					<th scope="col"><p> Interval </p></th>
+					<th scope="col"><p> Edit </p></th>
+
+			</tr>
+	{% for object in object_list %}	
+		</thead>
+		<tbody>
+			<tr>
+				<th scope="row"><p>{{ object.pk }}</p></th>
+					<td><p> {{ object.message }}  </p></td>
+					<td><p> {{ object.task.start_time }}</p></td>
+					<td><p>{{ object.task.expires }}  </p></td>
+					<td><p>{{ object.task.interval }}</p></td>
+					<td><a href="{% url 'reminder-edit' object.pk %}"><button>Edit Reminder</button></td></a>
+			<tr>		
+		</tbody>
 		{% endfor %}
-		</ul>
-
-	</div>
-	{% endif %}
-
+	</table>
 </div>
+
+{% endif %}
+
+
+{% else %}
+
+
+
+<h2>To add your reminders login or create new account</h2>
+
+
+	<div class="col container"> 
+			<a href="{%url 'register' %}">
+				<button class="btn">Create new account</button>
+			</a>
+			<br>
+			<a href="{%url 'login' %}">
+				<button class="btn">Login</button>
+			</a>
+	</div>
+
 {% endif %}
 
 

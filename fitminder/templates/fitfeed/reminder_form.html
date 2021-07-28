@@ -4,25 +4,29 @@
 {% block content %} 
 
 <div class="container">
-	<div class="content-section">
-		<form method="POST" enctype="multipart/form-data"> 
-			{% csrf_token %}
-			<fieldset class="form-group">
-				<legend class="border-bottom mb-4">Edit Reminder!</legend>
-				{{ form | crispy }}
-			</fieldset>
-			<div class="form-group">
-				<button class="btn btn-outline-info" type="submit">Run now!</button>
-			</div>
-		</form>
-        <a href="{% url 'reminder-delete' object.pk %}"><button>
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data"> 
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Edit Reminder!</legend>
+                {{ form | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-success" type="submit">Save Changes</button>
+            </div>
+        </form>
+        <button class="btn" id="fetchCoords">Fetch my coordinates</button>
+
+        <a href="{% url 'reminder-delete' object.pk %}">
+            <button class="btn btn-outline-danger">
             Delete Reminder
          </button></a>
-	</div>
+    </div>
 </div>
 
-<button id="fetchCoords">Fetch my coordinates</button>
+
 </div>
+
 
 <script type="text/javascript">
     function geoFindMe() {

@@ -49,18 +49,19 @@ class PeriodicTaskForm(forms.ModelForm):
 			'longitude',
 		]
 
+
 	# Datetime picker reference:
     # https://simpleisbetterthancomplex.com/tutorial/2019/01/03/how-to-use-date-picker-with-django.html
 
 	start_time = forms.DateTimeField(
-	        input_formats=['%Y/%m/%d %H:%M'],
+	        input_formats=['%Y-%m-%d %H:%M:%S'],
 	        widget=forms.DateTimeInput(attrs={
 	            'class': 'form-control datetimepicker-input',
 	            'data-target': '#datetimepicker1'
 	        })
 	    )
 	expires = forms.DateTimeField(
-	        input_formats=['%Y/%m/%d %H:%M'],
+	        input_formats=['%Y-%m-%d  %H:%M:%S'],
 	        widget=forms.DateTimeInput(attrs={
 	            'class': 'form-control datetimepicker-input',
 	            'data-target': '#datetimepicker2'

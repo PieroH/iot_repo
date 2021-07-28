@@ -121,11 +121,13 @@ class ReminderCreateView(CreateView):
 
 	# Get, Check and return Periodictask form details
 	def form_valid(self, form):
-
+		print(form.cleaned_data)
 		self.object = form.save()
 		reminder = Reminder.objects.create(
 			task=self.object,
 			message=form.cleaned_data['name'],
+			# start_time=form.cleaned_data['start_time'],
+			# expires=form.cleaned_data['expires'],
 			author=self.request.user,
 			joke=form.cleaned_data['joke'],
 			weather=form.cleaned_data['weather'],
@@ -133,9 +135,7 @@ class ReminderCreateView(CreateView):
 			longitude=form.cleaned_data['longitude'],
 		)
 		self.object.kwargs = json.dumps({"pk": reminder.pk})
-		print("IS SAVE WRONG?")
 		self.object.save()
-		print("IS SAVE !!!!!! RETURN?")
 		return super().form_valid(form)
 
 	# Redirect to submitted task in form
@@ -151,7 +151,7 @@ class OneOffReminderView(FormView):
 	template_name = "fitfeed/reminder_form_one_off.html"
 
 	def form_valid(self, form):
-		# We assume we got proper data at this point so we pass it directly to a Celery task
+		#Form is directly passed to a Celery
 		one_off_task.delay(form.cleaned_data)
 		return super().form_valid(form)
 

@@ -6,7 +6,7 @@
 			{% csrf_token %}
 				<h2>Your have logged out.</h2>
 
-				<span><button class="btn" type="submit">Login again</button> </span>			
+				<a href="{% url 'login' %}" class="btn" type="submit">Login again</a>
 			</div>
 		</form>
 

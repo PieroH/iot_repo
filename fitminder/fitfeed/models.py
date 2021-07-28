@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class Reminder(models.Model):
     reminder_id = models.CharField(max_length=50, null=False)
     task = models.ForeignKey(PeriodicTask, on_delete = models.CASCADE, default="")
-    message = models.TextField(null=False, verbose_name='Message', default="Message!!")
+    message = models.TextField(null=False, verbose_name='Message', default="")
     author = models.ForeignKey(User, on_delete = models.CASCADE, default="")
     joke = models.BooleanField(default=False)
     weather = models.BooleanField(default=False)

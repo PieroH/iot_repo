@@ -102,17 +102,7 @@ celery -A celery_test  worker -l info -B
 celery -A celery_test beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 ```
 
-##### Celery + Redis as broker for AUTOMATED SCHEDULING on Django App - Server
-
-Redis Install guide
-https://www.rosehosting.com/blog/how-to-install-configure-and-use-redis-on-ubuntu-16-04/
-
-Django - celery config 
-https://medium.com/@yedjoe/celery-4-periodic-task-in-django-9f6b5a8c21c7
-
-
 ## Celery Worker Running In Terminal Window
-
 
 ```bash
 $ celery -A celery_test  worker -l info -B
@@ -126,16 +116,15 @@ $ celery -A celery_test  worker -l info -B
 
 ```
 
-### In another, Celery_Beat should scan for periodic tasks saved in the PeriodicTasks.models.
+##### Celery + Redis as broker for AUTOMATED SCHEDULING on Django App - Server
 
-[[6] - Django_Celery_Beat](https://github.com/celery/django-celery-beat)
-```bash
+Redis Install guide
+https://www.rosehosting.com/blog/how-to-install-configure-and-use-redis-on-ubuntu-16-04/
 
-$ celery -A fitminder beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+Django - celery config 
+https://medium.com/@yedjoe/celery-4-periodic-task-in-django-9f6b5a8c21c7
 
-[2021-07-11 13:10:00,317: INFO/MainProcess] Scheduler: Sending due task RPI TASK (scheduler.views.task1)
 
-```
 ### Redis Server CLI Log: 
 
 ```bash 
@@ -148,10 +137,10 @@ redis-cli
 celery -A fitminder purge
 ```
 
-## RPI
+## RPI Runserver and listen on LAN
+```bash 
 python manage.py runserver 0.0.0.0:8080
-
-
+```
 
 ### Geolocation Service from browser
 https://docs.djangoproject.com/en/1.11/ref/contrib/gis/geoip/
