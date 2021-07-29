@@ -86,19 +86,18 @@ pip install -r requirements.txt
 ```
 
 
-
 # DEV - RUN APP OPERATIONS
 
-#### 1. Run Main Server from Fitminder App at directory based path (with manage.py)
+### 1. Run Main Server from Fitminder App at directory based path (with manage.py)
 ```bash 
   python3 manage.py runserver
 ```
-#### 2. Celery Worker Running In Terminal Window
+### 2. Celery Worker Running In Terminal Window
 ```bash
 celery -A celery_test  worker -l info -B
 ```
 
-#### 3. In another, Celery_Beat should scan for periodic tasks saved in the PeriodicTasks.models.
+### 3. In another, Celery_Beat should scan for periodic tasks saved in the PeriodicTasks.models.
 
 [[6] - Django_Celery_Beat](https://github.com/celery/django-celery-beat)
 ```bash
@@ -140,10 +139,7 @@ redis-cli
 celery -A fitminder purge
 ```
 
-## RPI Runserver and listen on LAN
-```bash 
-python manage.py runserver 0.0.0.0:8080
-```
+
 
 ### Geolocation Service from browser
 https://docs.djangoproject.com/en/1.11/ref/contrib/gis/geoip/

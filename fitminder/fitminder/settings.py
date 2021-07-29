@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
     'fitfeed',
     'users',
     'django_celery_beat',
@@ -116,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'CET'
 
 USE_I18N = True
 
@@ -150,8 +149,7 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
-# CELERY_TASK_ALWAYS_EAGER = True
-CELERY_TIMEZONE = 'Europe/Warsaw'
+CELERY_TIMEZONE = 'Europe/Brussels'
 CELERY_TEMPLATES = '../fitfeed/templates/fitfeed'
 
 # change to bootstrap 4

@@ -3,7 +3,7 @@ import requests
 
 from django.conf import settings
 from django.urls import reverse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django import forms
 from django.contrib.auth.decorators import login_required
@@ -99,7 +99,7 @@ class ReminderEditView(UpdateView):
 		if schedule:
 			# User has prompted us to change the task schedule - let's edit that
 			task = self.object.task
-			task.interval = schedule
+			task.interval = schedulet
 			task.save()
 		return super().form_valid(form)
 
@@ -117,17 +117,26 @@ class ReminderCreateView(CreateView):
 	def get_form(self, form_class=None):
 		form = super().get_form(form_class)
 		form.fields['task'].widget = forms.HiddenInput()
+		# form.fields['start_time'].widget = forms.DateTimeInput()
+		# form.fields['expires'].widget = forms.DateTimeInput()
 		return form
 
 	# Get, Check and return Periodictask form details
 	def form_valid(self, form):
-		print(form.cleaned_data)
-		self.object = form.save()
+
+
+		self.object = PeriodicTask(name=form.cleaned_data['name'], 
+			task=form.cleaned_data['task'],
+			interval=form.cleaned_data['interval'],
+			start_time=form.cleaned_data['start_time'],
+			expires=form.cleaned_data['expires'],
+			)
+
+		self.object.save()
+		print(self.object.start_time)
 		reminder = Reminder.objects.create(
 			task=self.object,
 			message=form.cleaned_data['name'],
-			# start_time=form.cleaned_data['start_time'],
-			# expires=form.cleaned_data['expires'],
 			author=self.request.user,
 			joke=form.cleaned_data['joke'],
 			weather=form.cleaned_data['weather'],
@@ -136,7 +145,7 @@ class ReminderCreateView(CreateView):
 		)
 		self.object.kwargs = json.dumps({"pk": reminder.pk})
 		self.object.save()
-		return super().form_valid(form)
+		return redirect('index')
 
 	# Redirect to submitted task in form
 	def get_success_url(self):
@@ -165,5 +174,5 @@ class DeleteReminderView(DeleteView):
 	def delete(self, request, *args, **kwargs):
 		reminder = self.get_object()
 		reminder.task.delete()
-		return render(request, 'fitfeed/index.html')
+		return redirect('index')
 		

@@ -57,14 +57,14 @@ class PeriodicTaskForm(forms.ModelForm):
 	        input_formats=['%Y-%m-%d %H:%M:%S'],
 	        widget=forms.DateTimeInput(attrs={
 	            'class': 'form-control datetimepicker-input',
-	            'data-target': '#datetimepicker1'
+	            'data-target': '#start_time'
 	        })
 	    )
 	expires = forms.DateTimeField(
 	        input_formats=['%Y-%m-%d  %H:%M:%S'],
 	        widget=forms.DateTimeInput(attrs={
 	            'class': 'form-control datetimepicker-input',
-	            'data-target': '#datetimepicker2'
+	            'data-target': '#expires'
 	        })
 	    )
 
