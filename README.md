@@ -123,6 +123,12 @@ celery -A fitminder beat -l info --scheduler django_celery_beat.schedulers:Datab
 ### 7. Enjoy Fitminder App!
 
 
+# Troubleshooting techniques for development environment
+```bash
+# PORT IN USE - kill port
+sudo lsof -t -i:8000
+sudo kill -9 <PID>
+```
 
 ### Redis Server CLI Log: 
 
@@ -135,11 +141,6 @@ redis-cli
 celery -A fitminder purge
 ```
 
-#### Trouble shooting techniques for development
-```bash
-# PORT IN USE
-sudo lsof -t -i:8000
-sudo kill -9 <PID>
-```
+
 
 
