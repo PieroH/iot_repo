@@ -2,19 +2,10 @@
 
 ## A reminder with scheduling capability controlled with Fitminder Application using Python-Django Web Development.
 
-### Keywords: Python, Django, Django_Celery_Beat, Redis, RaspberryPi, Automated Schedule, Periodic Tasks, Reminders
+##### Keywords: Python, Django, Django_Celery_Beat, Redis, RaspberryPi, Automated Schedule, Periodic Tasks, Reminders
 
 
-#### Trouble shooting techniques for development
-```bash
-# PORT IN USE
-sudo lsof -t -i:8000
-sudo kill -9 <PID>
-```
-
-```bash 
-```
-## FITMINDER Application Configuration
+## FITMINDER Application Configuration - links to documentation:
 
 #### Python-Django-Celery 
 
@@ -26,28 +17,43 @@ sudo kill -9 <PID>
 
 [[3] - Django Documentation](https://docs.djangoproject.com/en/3.2/)
 
+#### Celery + Redis as broker for AUTOMATED SCHEDULING on Django App - Server
+
+Redis Install guide
+https://www.rosehosting.com/blog/how-to-install-configure-and-use-redis-on-ubuntu-16-04/
+
+Django - celery config 
+https://medium.com/@yedjoe/celery-4-periodic-task-in-django-9f6b5a8c21c7
+
+#### Geolocation Service from browser
+https://docs.djangoproject.com/en/1.11/ref/contrib/gis/geoip/
+
+#### Weather API
+https://www.weatherapi.com/docs/
+
+#### Random Joke API - Fortune
+https://pypi.org/project/django-fortune/0.1/
 
 
-# HOW TO RUN THE VIRTUAL ENVIRONMENT FOR THE FITMINDER APP
+# HOW TO PREPARE ENVIRONMENT TO RUN THE FITMINDER APP
 
+=> Install pip3 package manager
 ``` bash
-
-# Get pip and upgrade
 sudo apt-get install pip
 python3 -m pip install --upgrade pip
 ```
 
-=> Installing virtual environment package
+=> Install virtual environment package
 ``` bash
 sudo pip3 install virtualenvwrapper
 
 ```
-=> Navigating into .bashrc configuration file & adding the code from below
+=> Navigate into .bashrc configuration file & adding the code from below
 
 ```bash 
 nano ~/.bashrc
 ```
-=> Adding Python VirtualEnv config.
+=> Add Python VirtualEnv config like below.
 
 ```bash 
 export WORKON_HOME=$HOME/.virtualenvs
@@ -78,53 +84,44 @@ created virtual environment CPython3.8.5.final.0-64 in 99ms
     added seed packages: pip==20.3.3, setuptools==51.3.3, wheel==0.36.2
   activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
 ```
-=> Install pip and all required packages with compatible versions from requirements.txt file
 
+
+# DEVELOPMENT ENVIRONMENT - RUN APPLICATION GUIDE
+
+### 1. Clone Fitminder (iot_repo) from github to your diskspace
 ```bash 
-# Install all packages from Requirements.txt
+git clone https://github.com/PieroH/iot_repo/
+```
+
+### 2. Enable virtual environment created above.
+```bash 
+  workon <name_of_Venv>
+```
+
+### 3. Install pip and all required packages with compatible versions from requirements.txt file
+```bash 
 pip install -r requirements.txt
 ```
 
-
-# DEV - RUN APP OPERATIONS
-
-### 1. Run Main Server from Fitminder App at directory based path (with manage.py)
+### 4. Run Main Server from Fitminder App at directory based path (with manage.py)
 ```bash 
   python3 manage.py runserver
 ```
-### 2. Celery Worker Running In Terminal Window
+
+### 5. Celery Worker Running In Terminal Window
 ```bash
 celery -A celery_test  worker -l info -B
 ```
 
-### 3. In another, Celery_Beat should scan for periodic tasks saved in the PeriodicTasks.models.
+### 6. In another, Celery_Beat should scan for periodic tasks saved in the PeriodicTasks.models.
 
 [[6] - Django_Celery_Beat](https://github.com/celery/django-celery-beat)
 ```bash
 celery -A celery_test beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 ```
 
-## Celery Worker Running In Terminal Window
+### 7. Enjoy Fitminder App!
 
-```bash
-$ celery -A celery_test  worker -l info -B
-
-
-[2021-07-10 20:41:51,725: INFO/MainProcess] Task scheduler.views.task1[b68765ec-a04f-476b-97c6-6cab2a83c383] received
-[2021-07-10 20:41:51,727: WARNING/ForkPoolWorker-2] ---- ITS WORKING!!! ----
-[2021-07-10 20:41:51,728: WARNING/ForkPoolWorker-2]  
-[2021-07-10 20:41:51,728: WARNING/ForkPoolWorker-2] Created Message!
-[2021-07-10 20:41:51,728: WARNING/ForkPoolWorker-2] 
-
-```
-
-##### Celery + Redis as broker for AUTOMATED SCHEDULING on Django App - Server
-
-Redis Install guide
-https://www.rosehosting.com/blog/how-to-install-configure-and-use-redis-on-ubuntu-16-04/
-
-Django - celery config 
-https://medium.com/@yedjoe/celery-4-periodic-task-in-django-9f6b5a8c21c7
 
 
 ### Redis Server CLI Log: 
@@ -132,18 +129,17 @@ https://medium.com/@yedjoe/celery-4-periodic-task-in-django-9f6b5a8c21c7
 ```bash 
 redis-cli
 ```
-
 ### Clean Celery (Purge)
 
 ```bash 
 celery -A fitminder purge
 ```
 
+#### Trouble shooting techniques for development
+```bash
+# PORT IN USE
+sudo lsof -t -i:8000
+sudo kill -9 <PID>
+```
 
 
-### Geolocation Service from browser
-https://docs.djangoproject.com/en/1.11/ref/contrib/gis/geoip/
-
-
-### Weather API
-https://www.weatherapi.com/docs/
