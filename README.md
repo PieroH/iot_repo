@@ -110,14 +110,14 @@ pip install -r requirements.txt
 
 ### 5. Celery Worker Running In Terminal Window
 ```bash
-celery -A celery_test  worker -l info -B
+celery -A fitminder  worker -l info -B
 ```
 
 ### 6. In another, Celery_Beat should scan for periodic tasks saved in the PeriodicTasks.models.
 
 [[6] - Django_Celery_Beat](https://github.com/celery/django-celery-beat)
 ```bash
-celery -A celery_test beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+celery -A fitminder beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 ```
 
 ### 7. Enjoy Fitminder App!
