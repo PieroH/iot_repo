@@ -45,7 +45,10 @@ def build_and_send_message(reminder):
 
 			# Troubleshoots than weather requests other than ="200" 
 			if request.status_code == 200:
-				prefix = ('The weather today is ' + request.json()['current']['condition']['text']) + '. '
+				text = ('The weather today is ' + request.json()['current']['condition']['text']) + ' ' 
+				temperature = ('and ' + str(request.json()['current']['temp_c'])) +  ' degrees Celcius. '
+
+				prefix = text + temperature
 				message = prefix + message
 				print(message)
 		except Exception as e:
@@ -99,7 +102,7 @@ class ReminderEditView(UpdateView):
 		if schedule:
 			# User has prompted us to change the task schedule - let's edit that
 			task = self.object.task
-			task.interval = schedulet
+			task.interval = schedule
 			task.save()
 		return super().form_valid(form)
 
